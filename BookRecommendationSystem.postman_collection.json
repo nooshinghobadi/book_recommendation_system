@@ -1,0 +1,1626 @@
+{
+	"info": {
+		"_postman_id": "74fbd03f-4904-4bb1-bfc5-6fd84f6b4b8e",
+		"name": "BookRecommendationSystem",
+		"description": "API endpoints for the Book Recommendation System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29491847"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Registration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has user id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"id\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/register/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"register",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/register/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:56:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"username\": \"testuser\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has access token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"access\");",
+									"    pm.environment.set(\"access_token\", jsonData.access);",
+									"    pm.environment.set(\"refresh_token\", jsonData.refresh);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/login/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:57:10 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"No active account found with the given credentials\"\n}"
+						},
+						{
+							"name": "User Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"password1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:58:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "483"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTc1MDMxNywiaWF0IjoxNzIxNjYzOTE3LCJqdGkiOiI2ODY3ODU2NWMzYjU0OGY5YTk5M2FjZDlmMjg1NmQzZSIsInVzZXJfaWQiOjF9.XfWKVLCWsFa2VlbzG5Wv-jpfNLRM7Jlbq_ldtIU0K1A\",\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNjY0MjE3LCJpYXQiOjE3MjE2NjM5MTcsImp0aSI6ImJlMTNlNTgxMGQxNjQ5Zjk5MjVmNjU5MTQ3ZWQ1ZDc2IiwidXNlcl9pZCI6MX0.M4eWD9NPyRcXz9J19h2YLTwLsmBGQgCXsg-b-QHpMIc\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has access token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"access\");",
+									"    pm.environment.set(\"access_token\", jsonData.access);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/token/refresh/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"token",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "List Books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/book/list/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book",
+								"list",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Books",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/book/list/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"book",
+										"list",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:31:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Given token not valid for any token type\",\n    \"code\": \"token_not_valid\",\n    \"messages\": [\n        {\n            \"token_class\": \"AccessToken\",\n            \"token_type\": \"access\",\n            \"message\": \"Token is invalid or expired\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "List Books",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/book/list/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"book",
+										"list",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:35:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4434"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Book A1\",\n        \"author\": \"Author 1\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Book A2\",\n        \"author\": \"Author 1\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Book A3\",\n        \"author\": \"Author 1\",\n        \"genre\": \"Science Fiction\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Book B1\",\n        \"author\": \"Author 2\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Book B2\",\n        \"author\": \"Author 2\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Book B3\",\n        \"author\": \"Author 2\",\n        \"genre\": \"Science\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Book C1\",\n        \"author\": \"Author 3\",\n        \"genre\": \"Cooking\"\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Book C2\",\n        \"author\": \"Author 3\",\n        \"genre\": \"Gardening\"\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Book C3\",\n        \"author\": \"Author 3\",\n        \"genre\": \"Travel\"\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Book D1\",\n        \"author\": \"Author 4\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 11,\n        \"title\": \"Book D2\",\n        \"author\": \"Author 4\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 12,\n        \"title\": \"Book D3\",\n        \"author\": \"Author 4\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 13,\n        \"title\": \"Book E1\",\n        \"author\": \"Author 5\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 14,\n        \"title\": \"Book E2\",\n        \"author\": \"Author 5\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 15,\n        \"title\": \"Book E3\",\n        \"author\": \"Author 5\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 16,\n        \"title\": \"Book F1\",\n        \"author\": \"Author 6\",\n        \"genre\": \"Science\"\n    },\n    {\n        \"id\": 17,\n        \"title\": \"Book F2\",\n        \"author\": \"Author 7\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 18,\n        \"title\": \"Book F3\",\n        \"author\": \"Author 8\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 19,\n        \"title\": \"Book F4\",\n        \"author\": \"Author 9\",\n        \"genre\": \"Science Fiction\"\n    },\n    {\n        \"id\": 20,\n        \"title\": \"Book F5\",\n        \"author\": \"Author 10\",\n        \"genre\": \"Cooking\"\n    },\n    {\n        \"id\": 21,\n        \"title\": \"Book F6\",\n        \"author\": \"Author 11\",\n        \"genre\": \"Gardening\"\n    },\n    {\n        \"id\": 22,\n        \"title\": \"Book F7\",\n        \"author\": \"Author 12\",\n        \"genre\": \"Travel\"\n    },\n    {\n        \"id\": 23,\n        \"title\": \"Book F8\",\n        \"author\": \"Author 13\",\n        \"genre\": \"Education\"\n    },\n    {\n        \"id\": 24,\n        \"title\": \"Book F9\",\n        \"author\": \"Author 14\",\n        \"genre\": \"Horror\"\n    },\n    {\n        \"id\": 25,\n        \"title\": \"Book F10\",\n        \"author\": \"Author 15\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 26,\n        \"title\": \"Book F11\",\n        \"author\": \"Author 16\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 27,\n        \"title\": \"Book F12\",\n        \"author\": \"Author 17\",\n        \"genre\": \"Science\"\n    },\n    {\n        \"id\": 28,\n        \"title\": \"Book F13\",\n        \"author\": \"Author 18\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 29,\n        \"title\": \"Book F14\",\n        \"author\": \"Author 19\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 30,\n        \"title\": \"Book F15\",\n        \"author\": \"Author 20\",\n        \"genre\": \"Science Fiction\"\n    },\n    {\n        \"id\": 31,\n        \"title\": \"Book F16\",\n        \"author\": \"Author 21\",\n        \"genre\": \"Cooking\"\n    },\n    {\n        \"id\": 32,\n        \"title\": \"Book F17\",\n        \"author\": \"Author 22\",\n        \"genre\": \"Gardening\"\n    },\n    {\n        \"id\": 33,\n        \"title\": \"Book F18\",\n        \"author\": \"Author 23\",\n        \"genre\": \"Travel\"\n    },\n    {\n        \"id\": 34,\n        \"title\": \"Book F19\",\n        \"author\": \"Author 24\",\n        \"genre\": \"Education\"\n    },\n    {\n        \"id\": 35,\n        \"title\": \"Book F20\",\n        \"author\": \"Author 25\",\n        \"genre\": \"Horror\"\n    },\n    {\n        \"id\": 36,\n        \"title\": \"Book F21\",\n        \"author\": \"Author 6\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 37,\n        \"title\": \"Book F22\",\n        \"author\": \"Author 7\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 38,\n        \"title\": \"Book F23\",\n        \"author\": \"Author 8\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 39,\n        \"title\": \"Book F24\",\n        \"author\": \"Author 9\",\n        \"genre\": \"Science\"\n    },\n    {\n        \"id\": 40,\n        \"title\": \"Book F25\",\n        \"author\": \"Author 10\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 41,\n        \"title\": \"Book F26\",\n        \"author\": \"Author 11\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 42,\n        \"title\": \"Book F27\",\n        \"author\": \"Author 12\",\n        \"genre\": \"Science Fiction\"\n    },\n    {\n        \"id\": 43,\n        \"title\": \"Book F28\",\n        \"author\": \"Author 13\",\n        \"genre\": \"Cooking\"\n    },\n    {\n        \"id\": 44,\n        \"title\": \"Book F29\",\n        \"author\": \"Author 14\",\n        \"genre\": \"Gardening\"\n    },\n    {\n        \"id\": 45,\n        \"title\": \"Book F30\",\n        \"author\": \"Author 15\",\n        \"genre\": \"Travel\"\n    },\n    {\n        \"id\": 46,\n        \"title\": \"Book F31\",\n        \"author\": \"Author 16\",\n        \"genre\": \"Education\"\n    },\n    {\n        \"id\": 47,\n        \"title\": \"Book F32\",\n        \"author\": \"Author 17\",\n        \"genre\": \"Horror\"\n    },\n    {\n        \"id\": 48,\n        \"title\": \"Book F33\",\n        \"author\": \"Author 18\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 49,\n        \"title\": \"Book F34\",\n        \"author\": \"Author 19\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 50,\n        \"title\": \"Book F35\",\n        \"author\": \"Author 20\",\n        \"genre\": \"Science\"\n    },\n    {\n        \"id\": 51,\n        \"title\": \"Book F36\",\n        \"author\": \"Author 21\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 52,\n        \"title\": \"Book F37\",\n        \"author\": \"Author 22\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 53,\n        \"title\": \"Book F38\",\n        \"author\": \"Author 23\",\n        \"genre\": \"Science Fiction\"\n    },\n    {\n        \"id\": 54,\n        \"title\": \"Book F39\",\n        \"author\": \"Author 24\",\n        \"genre\": \"Cooking\"\n    },\n    {\n        \"id\": 55,\n        \"title\": \"Book F40\",\n        \"author\": \"Author 25\",\n        \"genre\": \"Gardening\"\n    },\n    {\n        \"id\": 56,\n        \"title\": \"Book F41\",\n        \"author\": \"Author 6\",\n        \"genre\": \"Travel\"\n    },\n    {\n        \"id\": 57,\n        \"title\": \"Book F42\",\n        \"author\": \"Author 7\",\n        \"genre\": \"Education\"\n    },\n    {\n        \"id\": 58,\n        \"title\": \"Book F43\",\n        \"author\": \"Author 8\",\n        \"genre\": \"Horror\"\n    },\n    {\n        \"id\": 59,\n        \"title\": \"Book F44\",\n        \"author\": \"Author 9\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 60,\n        \"title\": \"Book F45\",\n        \"author\": \"Author 10\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 61,\n        \"title\": \"Book F46\",\n        \"author\": \"Author 11\",\n        \"genre\": \"Science\"\n    },\n    {\n        \"id\": 62,\n        \"title\": \"Book F47\",\n        \"author\": \"Author 12\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 63,\n        \"title\": \"Book F48\",\n        \"author\": \"Author 13\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 64,\n        \"title\": \"Book F49\",\n        \"author\": \"Author 14\",\n        \"genre\": \"Science Fiction\"\n    },\n    {\n        \"id\": 65,\n        \"title\": \"Book F50\",\n        \"author\": \"Author 15\",\n        \"genre\": \"Cooking\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "List Books by Genre",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/book?genre=History",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "History"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Books by Genre",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/book?genre=Fiction/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"book"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "Fiction/"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:32:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Given token not valid for any token type\",\n    \"code\": \"token_not_valid\",\n    \"messages\": [\n        {\n            \"token_class\": \"AccessToken\",\n            \"token_type\": \"access\",\n            \"message\": \"Token is invalid or expired\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "List Books by Genre",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/book?genre=History",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"book"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "History"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:36:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "404"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 4,\n        \"title\": \"Book B1\",\n        \"author\": \"Author 2\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 17,\n        \"title\": \"Book F2\",\n        \"author\": \"Author 7\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 28,\n        \"title\": \"Book F13\",\n        \"author\": \"Author 18\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 40,\n        \"title\": \"Book F25\",\n        \"author\": \"Author 10\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 51,\n        \"title\": \"Book F36\",\n        \"author\": \"Author 21\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 62,\n        \"title\": \"Book F47\",\n        \"author\": \"Author 12\",\n        \"genre\": \"History\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Add Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has review id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"id\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"book\": 1,\n    \"user\": 1,\n    \"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/review/add/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"review",
+								"add",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Review",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"book\": 1,\n    \"user\": 1,\n    \"rating\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/review/add/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"add",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:32:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Given token not valid for any token type\",\n    \"code\": \"token_not_valid\",\n    \"messages\": [\n        {\n            \"token_class\": \"AccessToken\",\n            \"token_type\": \"access\",\n            \"message\": \"Token is invalid or expired\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Add Review",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"book\": 11,\n    \"user\": 1,\n    \"rating\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/review/add/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"add",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:36:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"The fields book, user must make a unique set.\"\n    ]\n}"
+						},
+						{
+							"name": "Add Review",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"book\": 11,\n    \"user\": 1,\n    \"rating\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/review/add/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"add",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:40:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 421,\n    \"rating\": 5,\n    \"book\": 11,\n    \"user\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has updated rating\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"rating\", 4);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/review/update/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"review",
+								"update",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Review",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/review/update/1/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"update",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:32:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Given token not valid for any token type\",\n    \"code\": \"token_not_valid\",\n    \"messages\": [\n        {\n            \"token_class\": \"AccessToken\",\n            \"token_type\": \"access\",\n            \"message\": \"Token is invalid or expired\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Update Review",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/review/update/421/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"update",
+										"421",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:55:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "21"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 421,\n    \"rating\": 4\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/review/delete/421/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"review",
+								"delete",
+								"421",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Review",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/review/delete/421/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"delete",
+										"421",
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:56:28 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "23"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Not found.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Suggest Books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/suggest/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"suggest",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Suggest Books",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/suggest/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"suggest",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:33:17 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, GET"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Given token not valid for any token type\",\n    \"code\": \"token_not_valid\",\n    \"messages\": [\n        {\n            \"token_class\": \"AccessToken\",\n            \"token_type\": \"access\",\n            \"message\": \"Token is invalid or expired\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Suggest Books",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/suggest/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"suggest",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jul 2024 15:58:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "690"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 53,\n        \"title\": \"Book F38\",\n        \"author\": \"Author 23\",\n        \"genre\": \"Science Fiction\"\n    },\n    {\n        \"id\": 65,\n        \"title\": \"Book F50\",\n        \"author\": \"Author 15\",\n        \"genre\": \"Cooking\"\n    },\n    {\n        \"id\": 62,\n        \"title\": \"Book F47\",\n        \"author\": \"Author 12\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 60,\n        \"title\": \"Book F45\",\n        \"author\": \"Author 10\",\n        \"genre\": \"Mystery\"\n    },\n    {\n        \"id\": 63,\n        \"title\": \"Book F48\",\n        \"author\": \"Author 13\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 59,\n        \"title\": \"Book F44\",\n        \"author\": \"Author 9\",\n        \"genre\": \"Adventure\"\n    },\n    {\n        \"id\": 51,\n        \"title\": \"Book F36\",\n        \"author\": \"Author 21\",\n        \"genre\": \"History\"\n    },\n    {\n        \"id\": 54,\n        \"title\": \"Book F39\",\n        \"author\": \"Author 24\",\n        \"genre\": \"Cooking\"\n    },\n    {\n        \"id\": 52,\n        \"title\": \"Book F37\",\n        \"author\": \"Author 22\",\n        \"genre\": \"Romance\"\n    },\n    {\n        \"id\": 61,\n        \"title\": \"Book F46\",\n        \"author\": \"Author 11\",\n        \"genre\": \"Science\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}
